@@ -16,7 +16,7 @@ export default {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
-        loop:true
+        loop: true
       },
       swiperList: [{
         id: '0001',
@@ -39,7 +39,7 @@ export default {
     overflow:hidden
     width:100%
     height:0
-    padding-bottom:31.25%
+    padding-bottom:26.67%
     .swiper-img
       width:100%
 </style>
