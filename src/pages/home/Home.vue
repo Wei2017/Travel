@@ -15,6 +15,7 @@ import HomeSwiper from './components/Swiper'
 import HomeIcons from './components/Icons'
 import HomeRecomment from './components/Recomment'
 import HomeWeekend from './components/Weekend'
+import axios from 'axios'
 export default{
   name: 'Home',
   /* 注册局部组件 */
@@ -24,6 +25,19 @@ export default{
     HomeIcons,
     HomeRecomment,
     HomeWeekend
+  },
+  methods: {
+    getHomeInfo () {
+      axios.get('/api/index.json')
+        .then(this.getHomeInfoSucc)
+    },
+    getHomeInfoSucc (res) {
+      console.log(res)
+    }
+  },
+  /* 模板编译/挂载之后 生命周期钩子 */
+  mounted () {
+    this.getHomeInfo()
   }
 }
 </script>
