@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <swiper :options="swiperOption">
-      <swiper-slide v-for="item of swiperList" :key="item.id">
-        <img class="swiper-img" :src="item.imgUrl" alt="">
+    <swiper :options="swiperOption" v-if="showSwiper">
+      <swiper-slide v-for="item of list" :key="item.id">
+        <img class="swiper-img" :src="item.imgUrl" alt="item.imgUrl">
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
@@ -12,21 +12,22 @@
 <script>
 export default {
   name: 'HomeSwiper',
+  props: {
+    list: Array
+  },
   data () {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
         loop: true,
         autoplay: 2000
-      },
-      swiperList: [{
-        id: '0001',
-        imgUrl: 'https://img1.qunarzz.com/piao/fusion/1812/d6/daa880b254940402.jpg_750x200_b114308a.jpg'
-      },
-      {
-        id: '0002',
-        imgUrl: 'https://img1.qunarzz.com/piao/fusion/1811/7c/8e5c4ab8ee8b7402.jpg_750x200_dd7a38dd.jpg'
-      }]
+      }
+    }
+  },
+  computed: {
+    /* swiperList数组初次渲染为空 判断不为空的情况下再渲染 */
+    showSwiper () {
+      return this.list.length
     }
   }
 }
@@ -36,11 +37,14 @@ export default {
   // >>> 样式穿透 不受scoped的影响
   .wrapper >>> .swiper-pagination-bullet-active
     background-color:#fff
+  .wrapper >>> .swiper-slide
+    height:auto
   .wrapper
     overflow:hidden
     width:100%
     height:0
-    padding-bottom:26.67%
+    padding-bottom:30%
     .swiper-img
       width:100%
+      height:100%
 </style>

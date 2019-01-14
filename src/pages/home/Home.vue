@@ -1,10 +1,10 @@
 <template>
   <div>
-    <home-header></home-header>
-    <home-swiper></home-swiper>
-    <home-icons></home-icons>
-    <home-recomment></home-recomment>
-    <home-weekend></home-weekend>
+    <home-header :city="city"></home-header>
+    <home-swiper :list="swiperList"></home-swiper>
+    <home-icons :icon="iconList"></home-icons>
+    <home-recomment :list="recommentList"></home-recomment>
+    <home-weekend :list="weekendList"></home-weekend>
   </div>
 </template>
 
@@ -26,13 +26,33 @@ export default{
     HomeRecomment,
     HomeWeekend
   },
+  data () {
+    return {
+      city: '',
+      swiperList: [],
+      iconList: [],
+      /* 热销推荐 */
+      recommentList: [],
+      /* 周末去哪儿 */
+      weekendList: []
+    }
+  },
   methods: {
     getHomeInfo () {
-      axios.get('/newTravel/static/mock/index.json')
+      axios.get('/static/mock/index.json')
         .then(this.getHomeInfoSucc)
     },
     getHomeInfoSucc (res) {
-      console.log(res)
+      res = res.data
+      if (res.ret && res.data) {
+        const data = res.data
+        this.city = data.city
+        this.swiperList = data.swiperList
+        this.iconList = data.iconList
+        this.recommentList = data.recommendList
+        this.weekendList = data.weekendList
+        console.log(res)
+      }
     }
   },
   /* 模板编译/挂载之后 生命周期钩子 */
