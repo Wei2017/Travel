@@ -17,10 +17,11 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
 export default{
   name: 'HomeHeader',
-  props: {
-    city: String
+  computed: {
+    ...mapState(['city'])
   }
 }
 </script>
@@ -28,6 +29,7 @@ export default{
 <style lang="stylus" scoped>
   /* 引用变量设置样式 必须以@import开头、路径前边必须加~、styles是在build文件夹下的webpack.base.conf.js中设置的简写路径 详见34行 */
   @import '~styles/varibles.styl'
+  @import '~styles/mixins.styl'
   .header
     display:flex
     line-height:$headerHeight
@@ -51,9 +53,11 @@ export default{
       color:#ccc
     .header-right
       float:right
-      width:1.24rem
+      min-width:1.04rem
+      padding:0 .1rem
       text-align:center
       color:#fff
+      ellipsis()
       .arrow-icon
         margin-left:-.04rem
         font-size:.24rem

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <home-header :city="city"></home-header>
+    <home-header></home-header>
     <home-swiper :list="swiperList"></home-swiper>
     <home-icons :icon="iconList"></home-icons>
     <home-recomment :list="recommentList"></home-recomment>
@@ -28,7 +28,7 @@ export default{
   },
   data () {
     return {
-      city: '',
+      // city: '',
       swiperList: [],
       iconList: [],
       /* 热销推荐 */
@@ -46,7 +46,7 @@ export default{
       res = res.data
       if (res.ret && res.data) {
         const data = res.data
-        this.city = data.city
+        // this.city = data.city
         this.swiperList = data.swiperList
         this.iconList = data.iconList
         this.recommentList = data.recommendList
