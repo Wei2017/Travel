@@ -10,13 +10,16 @@
         </div>
       </div>
     </div>
-    <common-gallayr :imgs="gallaryImgs" v-show="showGallary" @hide="handleHide"></common-gallayr>
+    <fade-animation>
+      <common-gallayr :imgs="gallaryImgs" v-show="showGallary" @hide="handleHide"></common-gallayr>
+    </fade-animation>
   </div>
  
 </template>
 
 <script>
 import CommonGallayr from 'common/gallary/Gallary'
+import FadeAnimation from 'common/fade/FadeAnimation'
 export default {
   name: 'DetailBanner',
   props: {
@@ -25,7 +28,8 @@ export default {
     gallaryImgs: Array
   },
   components: {
-    CommonGallayr
+    CommonGallayr,
+    FadeAnimation
   },
   data () {
     return {
