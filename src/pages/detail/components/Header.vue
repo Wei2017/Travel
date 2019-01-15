@@ -36,11 +36,11 @@ export default {
       }
     }
   },
-  activated () {
-    window.addEventListener('scroll',this.handleScroll)
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
   },
-  deactivated () {
-    window.removeEventListener('scroll',this.handleScroll)
+  unmounted () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
@@ -65,6 +65,7 @@ export default {
     top:0
     left:0
     right:0
+    z-index:2
     height:$headerHeight
     line-height:$headerHeight
     overflow:hidden
