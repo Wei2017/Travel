@@ -16,6 +16,7 @@ import HomeIcons from './components/Icons'
 import HomeRecomment from './components/Recomment'
 import HomeWeekend from './components/Weekend'
 import axios from 'axios'
+import { mapState } from 'vuex'
 export default{
   name: 'Home',
   /* 注册局部组件 */
@@ -28,6 +29,7 @@ export default{
   },
   data () {
     return {
+      lastCity: '',
       // city: '',
       swiperList: [],
       iconList: [],
@@ -37,9 +39,12 @@ export default{
       weekendList: []
     }
   },
+  computed: {
+    ...mapState(['city'])
+  },
   methods: {
     getHomeInfo () {
-      axios.get('/static/mock/index.json')
+      axios.get('/static/mock/index.json?city=' + this.city)
         .then(this.getHomeInfoSucc)
     },
     getHomeInfoSucc (res) {
@@ -57,7 +62,14 @@ export default{
   },
   /* 模板编译/挂载之后 生命周期钩子 */
   mounted () {
+    this.lastCity = this.city
     this.getHomeInfo()
+  },
+  activated () {
+    if(this.lastCity !== this.city){
+      this.lastCity = this.city
+      this.getHomeInfo()
+    }
   }
 }
 </script>
